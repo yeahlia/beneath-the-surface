@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: black;
+}
+
+/* Each section fills the viewport */
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.bg {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+
+  /* Use the custom property set in HTML */
+  background-image: var(--src);
+  background-size: cover;        /* Fill screen */
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Pixel-perfect scaling */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+
+  /* Prevent browser seam artifacts */
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Optional smooth snap scroll */
+html {
+  scroll-snap-type: y mandatory;
+}
+.bg {
+  scroll-snap-align: start;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background: black;
+  scroll-behavior: smooth;
+}
+
+/* Prevent visible movement mid-resize */
+body.resizing * {
+  transition: none !important;
+}
+
