@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -24,7 +25,7 @@ main {
 
   /* Use the custom property set in HTML */
   background-image: var(--src);
-  background-size: cover;        /* Fill screen */
+  background-size: cover; /* Fill screen */
   background-position: center;
   background-repeat: no-repeat;
 
@@ -46,7 +47,8 @@ html {
   scroll-snap-align: start;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
@@ -59,3 +61,88 @@ body.resizing * {
   transition: none !important;
 }
 
+/* === CHARACTER PLACEMENT (FULL-SIZE IMAGE) === */
+.character-girl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* fill the section exactly */
+  height: 100%; /* match background size */
+  object-fit: contain; /* show full PNG without cropping */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  pointer-events: none;
+}
+
+.overlay-image {
+  position: absolute;
+  top: 50%; /* center vertically */
+  left: 25%; /* sits in the left half */
+  transform: translate(-50%, -50%); /* centers relative to that point */
+  width: 20%; /* ⬅️ smaller: half of previous 40% */
+  height: auto; /* keep aspect ratio */
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* subtle idle pulse */
+@keyframes gentlePulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.03);
+  }
+}
+
+.overlay-image {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 60%;
+  height: auto;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  animation: gentlePulse 3s ease-in-out infinite;
+  cursor: pointer; /* clickable cue */
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* hover interaction */
+.overlay-image:hover {
+  filter: brightness(1.2);
+  transform: translate(-50%, -50%) scale(1.08); /* slightly larger */
+  cursor: pointer;
+}
+
+/* === FIXED SODA BOTTLE === */
+#bottle-container {
+  position: fixed;
+  top: 38%; /* vertical placement — move up/down */
+  left: 63%; /* horizontal placement — move closer/farther from edge */
+  transform: translate(-50%, -50%);
+  width: 120px; /* bottle size — increase/decrease for bigger/smaller */
+  height: auto;
+  z-index: 999;
+  pointer-events: none; /* don’t block scroll or clicks */
+}
+
+.bottle-phase {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out; /* crossfade timing */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.bottle-phase.active {
+  opacity: 1;
+}

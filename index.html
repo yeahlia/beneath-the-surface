@@ -1,24 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pixel Background Scroll</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <main>
-    <section class="bg" style="--src: url('img/bg/bgbeach.png')"></section>
-    <section class="bg" style="--src: url('img/bg/bg2.png')"></section>
-    <section class="bg" style="--src: url('img/bg/bg3.png')"></section>
-    <section class="bg" style="--src: url('img/bg/bg4.png')"></section>
-    <section class="bg" style="--src: url('img/bg/bg5.png')"></section>
-    <section class="bg" style="--src: url('img/bg/bg6.png')"></section>
-    <section class="bg" style="--src: url('img/bg/bg7.png')"></section>
-    <section class="bg" style="--src: url('img/bg/bg8.png')"></section>
-    <section class="bg" style="--src: url('img/bg/bg9.png')"></section>
-    <section class="bg" style="--src: url('img/bg/bg10.png')"></section>
-  </main>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Background Scroll</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- FIXED SODA BOTTLE -->
+    <div id="bottle-container">
+      <img
+        src="img/elements/soda1.png"
+        class="bottle-phase active"
+        alt="soda phase 1"
+      />
+      <img
+        src="img/elements/soda3.png"
+        class="bottle-phase"
+        alt="soda phase 3"
+      />
+      <img
+        src="img/elements/soda4.png"
+        class="bottle-phase"
+        alt="soda phase 4"
+      />
+      <img
+        src="img/elements/soda5.png"
+        class="bottle-phase"
+        alt="soda phase 5"
+      />
+      <img
+        src="img/elements/soda6.png"
+        class="bottle-phase"
+        alt="soda phase 6"
+      />
+      <img
+        src="img/elements/soda7.png"
+        class="bottle-phase"
+        alt="soda phase 7"
+      />
+      <img
+        src="img/elements/soda8.png"
+        class="bottle-phase"
+        alt="soda phase 8"
+      />
+      <img
+        src="img/elements/soda9.png"
+        class="bottle-phase"
+        alt="soda phase 9"
+      />
+    </div>
+
+    <main>
+      <!-- 1. Beach -->
+      <section class="bg" style="background-image: url('img/bg/bgbeach.png')">
+        <img src="img/elements/girl.png" alt="girl" class="character-girl" />
+      </section>
+
+      <!-- 2. Background 2 -->
+      <section class="bg" style="background-image: url('img/bg/bg2.png')">
+        <img
+          src="img/elements/trash.png"
+          alt="trash"
+          class="overlay-image"
+          style="top: 50%; left: 25%; width: 20%"
+        />
+      </section>
+
+      <!-- 3. Background 3 -->
+      <section class="bg" style="background-image: url('img/bg/bg3.png')">
+        <img
+          src="img/elements/turtle.png"
+          alt="turtle"
+          class="overlay-image"
+          style="top: 55%; left: 60%; width: 18%"
+        />
+      </section>
+
+      <!-- 4. Background 4 -->
+      <section class="bg" style="background-image: url('img/bg/bg4.png')">
+        <img
+          src="img/elements/crab.png"
+          alt="crab"
+          class="overlay-image"
+          style="top: 65%; left: 40%; width: 15%"
+        />
+      </section>
+
+      <!-- 5. Background 5 -->
+      <section class="bg" style="background-image: url('img/bg/bg5.png')">
+        <img
+          src="img/elements/jellyfish.png"
+          alt="jellyfish"
+          class="overlay-image"
+          style="top: 45%; left: 70%; width: 16%"
+        />
+      </section>
+
+      <!-- 6. Background 6 -->
+      <section class="bg" style="background-image: url('img/bg/bg6.png')">
+        <img
+          src="img/elements/shark.png"
+          alt="shark"
+          class="overlay-image"
+          style="top: 55%; left: 60%; width: 25%"
+        />
+      </section>
+
+      <!-- 7. Background 7 -->
+      <section class="bg" style="background-image: url('img/bg/bg7.png')">
+        <img
+          src="img/elements/fish.png"
+          alt="fish"
+          class="overlay-image"
+          style="top: 40%; left: 25%; width: 12%"
+        />
+      </section>
+
+      <!-- 8. Background 8 -->
+      <section class="bg" style="background-image: url('img/bg/bg8.png')">
+        <img
+          src="img/elements/coral.png"
+          alt="coral"
+          class="overlay-image"
+          style="top: 35%; left: 30%; width: 40%"
+        />
+      </section>
+
+      <!-- 9. Background 9 -->
+      <section
+        class="bg"
+        style="background-image: url('img/bg/bg9.png')"
+      ></section>
+
+      <!-- 10. CALL TO ACTION -->
+      <section
+        class="bg"
+        style="background-image: url('img/bg/bg10.png')"
+      ></section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
 </html>
