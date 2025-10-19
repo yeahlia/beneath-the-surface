@@ -1,171 +1,110 @@
-* {
+html,
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
+  height: 100%;
   background: black;
-  font-family: sans-serif;
   overflow-x: hidden;
-  color: white;
+  font-family: "Courier New", monospace;
 }
 
-/* ==========================
-   INTRO SECTION
-========================== */
-.intro {
-  position: relative;
-  height: 100vh;
-  background: url("img/bg/bgbeach.png") center/cover no-repeat;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: white;
-  opacity: 0.2;
-  z-index: 1;
-}
-
-.title-stage {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  z-index: 2;
-}
-
-.word {
-  color: black;
-  font-size: 8vw;
-  opacity: 0;
-  transform: scale(1);
-}
-
-/* ==========================
-   MAIN SCROLL SECTIONS
-========================== */
 main {
   display: flex;
   flex-direction: column;
 }
 
-.bg {
+/* Each scene fills the viewport */
+.scene {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  image-rendering: pixelated;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  overflow: hidden;
 }
 
-/* Girl */
-.character-girl {
+/* The pixel background canvas */
+.scene-canvas {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  pointer-events: none;
   image-rendering: pixelated;
-}
-
-/* Overlay image */
-.overlay-image {
-  position: absolute;
-  transform: translate(-50%, -50%) scale(1);
-  image-rendering: pixelated;
-  transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-/* Popup box */
-.popup {
-  position: absolute;
-  bottom: 10%;
-  right: 5%;
-  width: 260px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  font-family: sans-serif;
-  opacity: 0;
-  transform: translateX(40px);
-  transition: all 0.6s ease;
-}
-.popup.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* Bottle */
-#bottle-container {
-  position: fixed;
-  top: 38%;
-  left: 63%;
-  transform: translate(-50%, -50%);
-  width: 120px;
-  z-index: 999;
-  pointer-events: none;
-}
-.bottle-phase {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  transition: opacity 0.2s linear;
-  image-rendering: pixelated;
-}
-.bottle-phase.active {
-  opacity: 1;
-}
-
-/* Call to Action */
-.cta {
-  position: absolute;
-  bottom: 30%;
-  width: 100%;
-  text-align: center;
-  font-size: 2.5rem;
-  color: white;
-  opacity: 0;
-}
-
-/* ===== INTRO (reuses beach background) ===== */
-.intro {
-  position: relative;
-  overflow: hidden;
-}
-
-.intro-overlay {
-  position: absolute;
-  inset: 0;
-  background: white;
-  opacity: 0.2;
+  image-rendering: crisp-edges;
   z-index: 1;
 }
 
-.title-stage {
+/* Overlay elements (like girl, bottle, etc.) */
+.overlay-elements {
   position: absolute;
   inset: 0;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
-.word {
-  color: black;
-  font-size: clamp(40px, 10vw, 150px);
-  opacity: 0;
-  transform: scale(1);
+.element {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  image-rendering: pixelated;
+}
+
+/* Popup */
+.popup {
+  position: absolute;
+  bottom: 8%;
+  right: 8%;
+  width: 30%;
+  min-width: 250px;
+  padding: 1rem;
+  background: rgba(0, 100, 150, 0.8);
+  border: 3px solid #89e3ff;
+  border-radius: 8px;
+  color: white;
+  text-shadow: 0 0 4px rgba(0, 255, 255, 0.6);
+  z-index: 3;
+}
+
+/* title container */
+.title-group {
+  position: absolute;
+  inset: 0; /* cover whole scene */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5; /* above the canvas */
+  pointer-events: none; /* so clicks pass through */
+}
+
+/* shared word styling */
+.title-word {
+  color: rgb(17, 22, 169);
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  -webkit-text-stroke: 4px black; /* outline thickness + colour */
+
+  letter-spacing: 0.05em;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+  position: relative; /* allows individual top/left tweaks */
+}
+
+/* individual positioning you can tweak freely */
+#title-beneath {
+  font-size: 15vw;
+  transform: translateY(2000px); /* start below screen */
+}
+
+#title-the {
+  font-size: 12vw; /* scales with viewport */
+  transform: translateY(2000px); /* adjust this */
+}
+
+#title-surface {
+  font-size: 15vw; /* scales with viewport */
+  transform: translateY(2000px); /* adjust this */
 }

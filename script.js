@@ -1,75 +1,94 @@
-// ===== RESIZE HANDLER =====
-let resizeTimeout;
+function drawScaled(img, canvas, ctx, sharedScale) {
+  const baseW = 320;
+  const baseH = 180;
+  const { scale, drawW, drawH, offsetX, offsetY } = sharedScale;
 
-function resizeSections() {
-  document.querySelectorAll(".bg").forEach((section) => {
-    section.style.height = `${window.innerHeight}px`;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, offsetX, offsetY, drawW, drawH);
+}
+
+function computeScale() {
+  const baseW = 320;
+  const baseH = 180;
+  const winW = window.innerWidth;
+  const winH = window.innerHeight;
+  const scale = Math.max(winW / baseW, winH / baseH);
+  const drawW = baseW * scale;
+  const drawH = baseH * scale;
+  const offsetX = (winW - drawW) / 2;
+  const offsetY = (winH - drawH) / 2;
+  return { scale, drawW, drawH, offsetX, offsetY };
+}
+
+function initScenes() {
+  const canvases = document.querySelectorAll(".scene-canvas");
+  const sharedScale = computeScale();
+  const entries = [];
+
+  canvases.forEach((canvas) => {
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.src = canvas.dataset.src;
+    img.onload = () => drawScaled(img, canvas, ctx, sharedScale);
+    entries.push({ img, canvas, ctx });
+  });
+
+  window.addEventListener("resize", () => {
+    const newScale = computeScale();
+    entries.forEach(({ img, canvas, ctx }) =>
+      drawScaled(img, canvas, ctx, newScale)
+    );
   });
 }
-resizeSections();
 
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(resizeSections, 150);
+window.addEventListener("load", initScenes);
+
+// ====================== LENIS + GSAP ==========================
+
+// smooth scrolling via Lenis
+const lenis = new Lenis({
+  smooth: true, // enable smoothing
+  lerp: 0.08, // inertia (0.05–0.1 = smooth, 0.15–0.2 = snappier)
+  wheelMultiplier: 1.0, // adjust scroll speed if needed
 });
 
-// ====== GSAP INTRO ANIMATION ======
+// use Lenis' internal raf for smooth motion
+function raf(time) {
+  lenis.raf(time);
+  ScrollTrigger.update(); // keep GSAP ScrollTrigger synced
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// ====================== GSAP ONLY ==========================
+
 gsap.registerPlugin(ScrollTrigger);
 
-const introTL = gsap.timeline({
+const beachtl = gsap.timeline({
   scrollTrigger: {
-    trigger: ".intro",
+    trigger: "#scene-beach",
     start: "top top",
-    end: "+=300%",
+    end: "+=3000", // scroll distance for the sequence
     scrub: true,
     pin: true,
+    markers: true,
   },
 });
 
-introTL
-  .to(".w1", { opacity: 1, duration: 1 })
-  .to(".w1", { opacity: 0, duration: 1 }, "+=0.5")
-  .to(".w2", { opacity: 1, duration: 1 })
-  .to(".w2", { opacity: 0, duration: 1 }, "+=0.5")
-  .to(".w3", { opacity: 1, duration: 1 })
-  .to(".w3", { scale: 8, opacity: 0, duration: 2 }, "+=0.5")
-  .to(".intro-overlay", { opacity: 0, duration: 2 }, "<");
+// move upward from bottom
+beachtl
+  .to("#title-beneath", { y: 0, ease: "none" })
+  .to({}, { duration: 0.3 }) // short pause
+  .to("#title-the", { y: 0, ease: "none" })
+  .to({}, { duration: 0.3 }) // another pause
+  .to("#title-surface", { y: 0, ease: "none" })
+  .to({}, { duration: 4.5 }); // final pause
 
-// ====== SCROLLAMA (your existing logic) ======
-const scroller = scrollama();
-const bottlePhases = document.querySelectorAll(".bottle-phase");
-const sections = document.querySelectorAll(".bg");
-const popups = document.querySelectorAll(".popup");
-
-function setBottlePhase(sectionIndex) {
-  if (sectionIndex >= 9) {
-    bottlePhases.forEach((img) => img.classList.remove("active"));
-    return;
-  }
-  let phaseIndex = sectionIndex <= 1 ? 0 : sectionIndex - 1;
-  bottlePhases.forEach((img, i) =>
-    img.classList.toggle("active", i === phaseIndex)
-  );
-}
-
-function showPopup(sectionIndex) {
-  popups.forEach((popup, i) => {
-    popup.classList.toggle("visible", i === sectionIndex);
-  });
-}
-
-scroller
-  .setup({
-    step: ".bg",
-    offset: 0.5,
-    debug: false,
-  })
-  .onStepEnter((response) => {
-    const { index } = response;
-    setBottlePhase(index);
-    showPopup(index);
-  })
-  .onStepExit((response) => {
-    const { index, direction } = response;
-    if (direction === "up") popups[index].classList.remove("visible");
-  });
+// optional: keep ScrollTrigger in sync when resizing
+window.addEventListener("resize", () => {
+  ScrollTrigger.refresh();
+});
