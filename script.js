@@ -53,7 +53,7 @@ window.addEventListener("load", initScenes);
 const lenis = new Lenis({
   smooth: true, // enable smoothing
   lerp: 0.08, // inertia (0.05–0.1 = smooth, 0.15–0.2 = snappier)
-  wheelMultiplier: 1.0, // adjust scroll speed if needed
+  wheelMultiplier: 0.5, // adjust scroll speed if needed
 });
 
 // use Lenis' internal raf for smooth motion
@@ -68,27 +68,43 @@ requestAnimationFrame(raf);
 
 gsap.registerPlugin(ScrollTrigger);
 
-const beachtl = gsap.timeline({
+// ================= BEACH SCENE ==================
+
+const beachScroll = gsap.timeline({
   scrollTrigger: {
     trigger: "#scene-beach",
     start: "top top",
-    end: "+=3000", // scroll distance for the sequence
+    end: "+=6000",   // enough scroll distance for all animations
     scrub: true,
     pin: true,
     markers: true,
-  },
+  }
 });
 
-// move upward from bottom
-beachtl
-  .to("#title-beneath", { y: 0, ease: "none" })
-  .to({}, { duration: 0.3 }) // short pause
-  .to("#title-the", { y: 0, ease: "none" })
-  .to({}, { duration: 0.3 }) // another pause
-  .to("#title-surface", { y: 0, ease: "none" })
-  .to({}, { duration: 4.5 }); // final pause
+// main text animation timeline
+const beachAnim = gsap.timeline()
+  // 1️⃣ words rising
+  .to("#title-beneath", { y: 0, ease: "power1.out", duration: 0.6 })
+  .to("#title-the", { y: 0, ease: "none", duration: 0.6 })
+  .to("#title-surface", { y: 0, ease: "none", duration: 0.6 })
+  
+  // 2️⃣ text scaling + fading out
+  .to(".title-word", { scale: 10, opacity: 0, duration: 1.0, ease: "power2.in" })
+  
+  // 3️⃣ girl slides in AFTER text is gone
+  .fromTo(
+  ".element-girl",
+  { left: "-100%" },                     // start position
+  { left: "0%", duration: 2.0, ease: "power2.out" }  // end position
+)
 
-// optional: keep ScrollTrigger in sync when resizing
+
+
+// add both timelines in sequence
+beachScroll.add(beachAnim, 0);
+beachScroll.to({}, { duration: 2 }); // short hold at end
+
+// keep ScrollTrigger responsive
 window.addEventListener("resize", () => {
   ScrollTrigger.refresh();
 });

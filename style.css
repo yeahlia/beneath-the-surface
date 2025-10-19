@@ -50,6 +50,15 @@ main {
   image-rendering: pixelated;
 }
 
+.element-girl {
+  position: absolute;
+  left: -100%;          /* start fully off-screen left */
+  width: 100%;          /* keep your full image width */
+  image-rendering: pixelated;
+  transform: translateX(0);
+  z-index: 4;
+}
+
 /* Popup */
 .popup {
   position: absolute;
@@ -91,7 +100,9 @@ main {
   line-height: 1;
   text-transform: uppercase;
   position: relative; /* allows individual top/left tweaks */
+  transform-origin: center center;
 }
+
 
 /* individual positioning you can tweak freely */
 #title-beneath {
