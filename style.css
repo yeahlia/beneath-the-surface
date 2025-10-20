@@ -25,6 +25,13 @@ main {
   overflow: hidden;
 }
 
+/* === Scene wrapper to keep canvas + overlays in same coordinate space === */
+.scene-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 /* The pixel background canvas */
 .scene-canvas {
   position: absolute;
@@ -37,29 +44,30 @@ main {
   z-index: 1;
 }
 
-/* Overlay elements (like girl, bottle, etc.) */
-.overlay-elements {
+/* Overlay elements (girl + soda share the same coordinate space as canvas) */
+.element-girl {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: -100%;          /* start fully off-screen left */
+  width: 100%;          /* fill canvas */
+  height: 100%;
+  image-rendering: pixelated;
+  transform: translateX(0);
   z-index: 2;
 }
 
-.element {
+.soda1 {
   position: absolute;
-  transform: translate(-50%, -50%);
-  image-rendering: pixelated;
-}
-
-.element-girl {
-  position: absolute;
-  left: -100%;          /* start fully off-screen left */
-  width: 100%;          /* keep your full image width */
+  top: 38%;
+  right: 33%;
+  width: 10%;
+  height: auto;
   image-rendering: pixelated;
   transform: translateX(0);
-  z-index: 4;
+  z-index: 3;
 }
 
-/* Popup */
+/* Popup boxes for later scenes */
 .popup {
   position: absolute;
   bottom: 8%;
@@ -75,7 +83,7 @@ main {
   z-index: 3;
 }
 
-/* title container */
+/* Title container and text */
 .title-group {
   position: absolute;
   inset: 0; /* cover whole scene */
@@ -94,15 +102,13 @@ main {
   font-optical-sizing: auto;
   font-style: normal;
   -webkit-text-stroke: 4px black; /* outline thickness + colour */
-
   letter-spacing: 0.05em;
   margin: 0;
   line-height: 1;
   text-transform: uppercase;
-  position: relative; /* allows individual top/left tweaks */
+  position: relative;
   transform-origin: center center;
 }
-
 
 /* individual positioning you can tweak freely */
 #title-beneath {
@@ -111,11 +117,34 @@ main {
 }
 
 #title-the {
-  font-size: 12vw; /* scales with viewport */
-  transform: translateY(2000px); /* adjust this */
+  font-size: 12vw;
+  transform: translateY(2000px);
 }
 
 #title-surface {
-  font-size: 15vw; /* scales with viewport */
-  transform: translateY(2000px); /* adjust this */
+  font-size: 15vw;
+  transform: translateY(2000px);
 }
+
+/* =========== TRASH ==================== */
+.overlay-trash {
+  position: absolute;
+  top: 40%;      /* adjust as needed */
+  left: 35%;
+  width: 30%;
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 2;
+}
+
+/* Optional: if you want the popup box to animate later */
+#scene-trash .popup {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scene + .scene {
+  margin-top: -1px; /* overlap by 1px so there’s no visual gap */
+}
+

@@ -30,12 +30,16 @@ function initScenes() {
   const entries = [];
 
   canvases.forEach((canvas) => {
-    const ctx = canvas.getContext("2d");
-    const img = new Image();
-    img.src = canvas.dataset.src;
-    img.onload = () => drawScaled(img, canvas, ctx, sharedScale);
-    entries.push({ img, canvas, ctx });
-  });
+  const ctx = canvas.getContext("2d");
+  const img = new Image();
+  img.src = canvas.dataset.src;
+  img.onload = () => {
+    drawScaled(img, canvas, ctx, sharedScale);
+    ScrollTrigger.refresh(); // ✅ refresh only after the image is drawn
+  };
+  entries.push({ img, canvas, ctx });
+});
+
 
   window.addEventListener("resize", () => {
     const newScale = computeScale();
@@ -64,47 +68,82 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// ====================== GSAP ONLY ==========================
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ================= BEACH SCENE ==================
+// ================== SCENE 1 — Beach ==================
 
-const beachScroll = gsap.timeline({
+const beachTL = gsap.timeline({
   scrollTrigger: {
     trigger: "#scene-beach",
     start: "top top",
-    end: "+=6000",   // enough scroll distance for all animations
-    scrub: true,
+    end: "+=3000",     // shorter range = quicker handoff to next scene
+    scrub: 1,
     pin: true,
+    pinSpacing: true,  // keep space for smooth transition
+    anticipatePin: 1,
     markers: true,
   }
 });
 
-// main text animation timeline
-const beachAnim = gsap.timeline()
-  // 1️⃣ words rising
+beachTL
+  // --- Title sequence ---
   .to("#title-beneath", { y: 0, ease: "power1.out", duration: 0.6 })
-  .to("#title-the", { y: 0, ease: "none", duration: 0.6 })
-  .to("#title-surface", { y: 0, ease: "none", duration: 0.6 })
-  
-  // 2️⃣ text scaling + fading out
-  .to(".title-word", { scale: 10, opacity: 0, duration: 1.0, ease: "power2.in" })
-  
-  // 3️⃣ girl slides in AFTER text is gone
+  .to("#title-the",     { y: 0, ease: "none",        duration: 0.6 })
+  .to("#title-surface", { y: 0, ease: "none",        duration: 0.6 })
+  .to(".title-word",    { scale: 10, opacity: 0, duration: 1.0, ease: "power2.in" })
+
+  // --- Girl and soda entering together ---
   .fromTo(
-  ".element-girl",
-  { left: "-100%" },                     // start position
-  { left: "0%", duration: 2.0, ease: "power2.out" }  // end position
-)
+    ".element-girl",
+    { left: "-100%" },
+    {
+      left: "0%",
+      duration: 2.5,
+      ease: "power2.out",
+      onUpdate: () => {
+        const girl = document.querySelector(".element-girl");
+        const soda = document.querySelector(".soda1");
+        if (!girl || !soda) return;
 
+        const r = girl.getBoundingClientRect();
+        // Adjust these multipliers until the soda perfectly lines up with her hand
+        soda.style.top  = r.top + r.height * 0.32 + "px";
+        soda.style.left = r.left + r.width  * 0.59 + "px";
+      },
+    }
+  );
 
+// ================== SCENE 2 — Trash ==================
 
-// add both timelines in sequence
-beachScroll.add(beachAnim, 0);
-beachScroll.to({}, { duration: 2 }); // short hold at end
+const trashTL = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#scene-trash",
+    start: "top top",       // start right as beach unpins
+    end: "+=2500",          // adjust scroll distance as needed
+    scrub: 1,
+    pin: true,
+    pinSpacing: true,
+    anticipatePin: 1,
+    markers: true,
+  }
+});
 
-// keep ScrollTrigger responsive
+trashTL
+  .from(".overlay-trash", {
+    y: 150,
+    opacity: 0,
+    duration: 1,
+    ease: "power2.out"
+  })
+  .to("#scene-trash .popup", {
+    opacity: 1,
+    x: 0,
+    duration: 0.8,
+    ease: "power1.out"
+  });
+
+// ================== Keep ScrollTrigger responsive ==================
 window.addEventListener("resize", () => {
   ScrollTrigger.refresh();
 });

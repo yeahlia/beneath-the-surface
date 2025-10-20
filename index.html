@@ -18,26 +18,54 @@
     <main>
       <!-- Scene 1: Beach -->
       <section class="scene" id="scene-beach">
-        <!-- Background canvas -->
-        <canvas
-          class="scene-canvas"
-          width="320"
-          height="180"
-          data-src="img/bg/bgbeach.png"
-        ></canvas>
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bgbeach.png"
+    ></canvas>
 
-        <!-- Title text -->
-        <div class="title-group">
-          <h1 class="title-word" id="title-beneath">BENEATH</h1>
-          <h1 class="title-word" id="title-the">THE</h1>
-          <h1 class="title-word" id="title-surface">SURFACE</h1>
-        </div>
+    <!-- Characters / overlay images -->
+    <img src="img/elements/girl.png" alt="girl" class="element-girl" />
+    <img src="img/elements/soda1.png" alt="soda bottle" class="soda1" />
+  </div>
 
-        <!-- Optional overlay elements -->
-        <div class="overlay-elements">
-        <img src="img/elements/girl.png" alt="girl" class="element-girl" />
-      </div>
-      </section>
+  <!-- Title text -->
+  <div class="title-group">
+    <h1 class="title-word" id="title-beneath">BENEATH</h1>
+    <h1 class="title-word" id="title-the">THE</h1>
+    <h1 class="title-word" id="title-surface">SURFACE</h1>
+  </div>
+</section>
+
+<!-- Scene 2: Trash -->
+<section class="scene" id="scene-trash">
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bg2.png"
+    ></canvas>
+
+    <!-- Overlay image (example: trash pile, plastic, etc.) -->
+    <img
+      src="img/elements/trash.png"
+      alt="trash"
+      class="overlay-trash"
+    />
+  </div>
+
+  <!-- Popup text box -->
+  <div class="popup">
+    <p>Discarded plastics often wash ashore, polluting fragile habitats.</p>
+  </div>
+</section>
+
+
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
