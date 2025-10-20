@@ -16,7 +16,7 @@
   </head>
   <body>
     <main>
-      <!-- Scene 1: Beach -->
+      <!-- ====== SCENE 1: BEACH ========== -->
       <section class="scene" id="scene-beach">
   <div class="scene-wrapper">
     <!-- Background canvas -->
@@ -40,7 +40,7 @@
   </div>
 </section>
 
-<!-- Scene 2: Trash -->
+<!-- ====== SCENE 2: TRASH ==========  -->
 <section class="scene" id="scene-trash">
   <div class="scene-wrapper">
     <!-- Background canvas -->
@@ -56,15 +56,279 @@
       src="img/elements/trash.png"
       alt="trash"
       class="overlay-trash"
+      style="top: 40%; left: 30%; width: 40%;"
     />
+    
+    <!-- Bubble particles for underwater effect -->
+    <div class="bubble-container">
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble1" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble2" />
+      <img src="img/elements/bubble3.png" alt="bubble" class="bubble bubble3" />
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble4" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble5" />
+    </div>
   </div>
 
   <!-- Popup text box -->
   <div class="popup">
-    <p>Discarded plastics often wash ashore, polluting fragile habitats.</p>
+    <p>At the surface, plastics collect into floating garbage patches. The largest, the Great Pacific Garbage Patch, is estimated to be three times the size of France. Plastics drifting here block sunlight, harm plankton growth, and serve as the first trap for marine animals that mistake them for food.</p>
   </div>
 </section>
 
+<!-- ====== SCENE 3: TURTLE ==========  -->
+<section class="scene" id="scene-turtle">
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bg3.png"
+    ></canvas>
+
+    <!-- Overlay image (trash pile, plastic, etc.) -->
+    <img
+      src="img/elements/turtle.png"
+      alt="turtle"
+      class="overlay-turtle"
+      style="top: 40%; left: 30%; width: 40%;"
+    />
+    
+    <!-- Bubble particles for underwater effect -->
+    <div class="bubble-container">
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble1" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble2" />
+      <img src="img/elements/bubble3.png" alt="bubble" class="bubble bubble3" />
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble4" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble5" />
+    </div>
+  </div>
+
+  <!-- Popup text box -->
+  <div class="popup">
+    <p> Sea turtles mistake floating bags for jellyfish. Ingesting even a small amount can block their digestive tract, leading to starvation. Scientists estimate that over half of the world’s sea turtles have eaten plastic, and for young turtles, the percentage is even higher.
+    </p>
+  </div>
+</section>
+
+<!-- ====== SCENE 4: CRAB ==========  -->
+<section class="scene" id="scene-crab">
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bg4.png"
+    ></canvas>
+
+    <!-- Overlay image (trash pile, plastic, etc.) -->
+    <img
+      src="img/elements/crab.png"
+      alt="crab"
+      class="overlay-crab"
+      style="top: 40%; left: 30%; width: 40%;"
+    />
+    
+    <!-- Bubble particles for underwater effect -->
+    <div class="bubble-container">
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble1" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble2" />
+      <img src="img/elements/bubble3.png" alt="bubble" class="bubble bubble3" />
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble4" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble5" />
+    </div>
+  </div>
+
+  <!-- Popup text box -->
+  <div class="popup">
+    <p>Marine life sometimes adapts to our waste, but in disturbing ways. Crabs and hermit crabs have been found using bottle caps, jars, and other debris as shells. While resourceful, this exposes them to sharp edges and toxins — survival strategies that reveal how deeply plastic has invaded the ocean.</p>
+  </div>
+</section>
+
+<!-- ====== SCENE 5: JELLYFISH ==========  -->
+<section class="scene" id="scene-jellyfish">
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bg5.png"
+    ></canvas>
+
+    <!-- Overlay image (trash pile, plastic, etc.) -->
+    <img
+      src="img/elements/jellyfish.png"
+      alt="jellyfish"
+      class="overlay-jellyfish"
+      style="top: 40%; left: 30%; width: 40%;"
+    />
+    
+    <!-- Bubble particles for underwater effect -->
+    <div class="bubble-container">
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble1" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble2" />
+      <img src="img/elements/bubble3.png" alt="bubble" class="bubble bubble3" />
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble4" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble5" />
+    </div>
+  </div>
+
+  <!-- Popup text box -->
+  <div class="popup">
+    <p>Plastic bags drifting through the water look uncannily like jellyfish. Larger marine animals such as dolphins, whales, and sunfish often swallow them whole. Inside their stomachs, the bags cause suffocation or lethal blockages. To them, our waste is indistinguishable from prey.</p>
+  </div>
+</section>
+
+<!-- ====== SCENE 6: SHARK ==========  -->
+<section class="scene" id="scene-shark">
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bg6.png"
+    ></canvas>
+
+    <!-- Overlay image (trash pile, plastic, etc.) -->
+    <img
+      src="img/elements/shark.png"
+      alt="shark"
+      class="overlay-shark"
+      style="top: 40%; left: 30%; width: 40%;"
+    />
+    
+    <!-- Bubble particles for underwater effect -->
+    <div class="bubble-container">
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble1" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble2" />
+      <img src="img/elements/bubble3.png" alt="bubble" class="bubble bubble3" />
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble4" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble5" />
+    </div>
+  </div>
+
+  <!-- Popup text box -->
+  <div class="popup">
+    <p>Abandoned fishing gear, known as “ghost nets,” continues trapping and killing marine animals long after being discarded. Sharks, rays, and turtles are frequent victims. Ghost gear makes up an estimated 10% of all ocean plastic and drifts invisibly through currents, entangling whatever crosses its path.
+    </p>
+  </div>
+</section>
+
+<!-- ====== SCENE 7: FISHES ==========  -->
+<section class="scene" id="scene-fishes">
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bg7.png"
+    ></canvas>
+
+    <!-- Overlay image (trash pile, plastic, etc.) -->
+    <img
+      src="img/elements/fish.png"
+      alt="fishes"
+      class="overlay-fishes"
+      style="top: 40%; left: 30%; width: 40%;"
+    />
+    
+    <!-- Bubble particles for underwater effect -->
+    <div class="bubble-container">
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble1" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble2" />
+      <img src="img/elements/bubble3.png" alt="bubble" class="bubble bubble3" />
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble4" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble5" />
+    </div>
+  </div>
+
+  <!-- Popup text box -->
+  <div class="popup">
+    <p>As bottles fragment, they become microplastics - pieces smaller than 5mm. These particles are eaten by fish, shellfish, and plankton, entering the food chain from the very bottom. Studies have detected microplastics in sea salt, tap water, bottled water, and even human bloodstreams.</p>
+  </div>
+</section>
+
+<!-- ====== SCENE 8: CORAL ==========  -->
+<section class="scene" id="scene-coral">
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bg8.png"
+    ></canvas>
+
+    <!-- Overlay image (trash pile, plastic, etc.) -->
+    <img
+      src="img/elements/coral.png"
+      alt="coral"
+      class="overlay-coral"
+      style="top: 40%; left: 30%; width: 40%;"
+    />
+    
+    <!-- Bubble particles for underwater effect -->
+    <div class="bubble-container">
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble1" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble2" />
+      <img src="img/elements/bubble3.png" alt="bubble" class="bubble bubble3" />
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble4" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble5" />
+    </div>
+  </div>
+
+  <!-- Popup text box -->
+  <div class="popup">
+    <p> Coral reefs are biodiversity hotspots, but plastics put them under siege. Fishing lines and nets snag and smother corals, while bottles and bags increase the risk of disease outbreaks by nearly 90%. Once damaged, coral takes decades to recover — if it can recover at all.</p>
+  </div>
+</section>
+
+<!-- ====== SCENE 9: BLANK ==========  -->
+<section class="scene" id="scene-trash8">
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bg9.png"
+    ></canvas>
+    
+    <!-- Bubble particles for underwater effect -->
+    <div class="bubble-container">
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble1" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble2" />
+      <img src="img/elements/bubble3.png" alt="bubble" class="bubble bubble3" />
+      <img src="img/elements/bubble1.png" alt="bubble" class="bubble bubble4" />
+      <img src="img/elements/bubble2.png" alt="bubble" class="bubble bubble5" />
+    </div>
+  </div>
+
+  <div class="blank-text">
+    <p class="line1"> On the seabed, plastics accumulate into hidden dumps.</p>
+    <p class="line2"> A single bottle can take up to 450 years to fully break down,</p>
+    <p class="line3"> slowly releasing chemicals the entire time.</p>
+    <p class="line4"> By 2050, scientists warn there that by weight,</p>
+    <p class="line5"> there may be more plastic than fish in the ocean if nothing changes.</p>
+  </div>
+</section>
+
+<!-- ====== SCENE 10: BACKGROUND ONLY ==========  -->
+<section class="scene" id="scene-finale">
+  <div class="scene-wrapper">
+    <!-- Background canvas -->
+    <canvas
+      class="scene-canvas"
+      width="320"
+      height="180"
+      data-src="img/bg/bg10.png"
+    ></canvas>
+  </div>
+</section>
 
     </main>
 
