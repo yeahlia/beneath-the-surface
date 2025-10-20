@@ -1,3 +1,45 @@
+// Force refresh on window resize
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    window.location.reload();
+  }, 100); // Small delay to prevent excessive refreshes
+});
+
+// Display current window size for debugging
+console.log(`Current window size: ${window.innerWidth}x${window.innerHeight}`);
+console.log(`Use this as your max-width: ${window.innerWidth}px`);
+
+// Also display it on the page temporarily
+document.addEventListener('DOMContentLoaded', () => {
+  const sizeDisplay = document.createElement('div');
+  sizeDisplay.style.cssText = `
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    z-index: 10000;
+    font-size: 14px;
+  `;
+  sizeDisplay.innerHTML = `
+    Window: ${window.innerWidth}x${window.innerHeight}<br>
+    Max-width: ${window.innerWidth}px
+  `;
+  document.body.appendChild(sizeDisplay);
+  
+  // Remove after 5 seconds
+  setTimeout(() => {
+    if (sizeDisplay.parentNode) {
+      sizeDisplay.parentNode.removeChild(sizeDisplay);
+    }
+  }, 5000);
+});
+
 function drawScaled(img, canvas, ctx, sharedScale) {
   const baseW = 320;
   const baseH = 180;
@@ -77,7 +119,7 @@ const masterTL = gsap.timeline({
   scrollTrigger: {
     trigger: "main",
     start: "top top",
-    end: "+=20000",  // Much longer scroll distance to ensure all animations complete
+    end: "+=30000",  // Even longer scroll distance to reach all scenes including blue scene
     scrub: 1,
     pin: false,  // We'll handle pinning manually
     markers: true,
@@ -95,9 +137,10 @@ const fishesScene = document.querySelector('#scene-fishes');
 const coralScene = document.querySelector('#scene-coral');
 const blankScene = document.querySelector('#scene-trash8');
 const finaleScene = document.querySelector('#scene-finale');
+const blueScene = document.querySelector('#scene-blue');
 
 // Make all scenes fixed positioned so we can control them
-const allScenes = [beachScene, trashScene, turtleScene, crabScene, jellyfishScene, sharkScene, fishesScene, coralScene, blankScene, finaleScene];
+const allScenes = [beachScene, trashScene, turtleScene, crabScene, jellyfishScene, sharkScene, fishesScene, coralScene, blankScene, finaleScene, blueScene];
 
 allScenes.forEach((scene, index) => {
   scene.style.position = 'fixed';
@@ -105,7 +148,13 @@ allScenes.forEach((scene, index) => {
   scene.style.left = '0';
   scene.style.zIndex = (allScenes.length - index).toString();
   scene.style.width = '100vw';
-  scene.style.height = '100.2vh'; // guard against subpixel seams
+  
+  // Blue scene gets special height treatment
+  if (scene === blueScene) {
+    scene.style.height = '150vh'; // Use the taller height for blue scene
+  } else {
+    scene.style.height = '100.2vh'; // guard against subpixel seams
+  }
 });
 
 // Create a second soda bottle for viewport fixing
@@ -130,6 +179,7 @@ gsap.set(fishesScene, { y: "100vh" });
 gsap.set(coralScene, { y: "100vh" });
 gsap.set(blankScene, { y: "100vh" });
 gsap.set(finaleScene, { y: "100vh" });
+gsap.set(blueScene, { y: "100vh" });
 
 // Randomize bubble images for all scenes
 function randomizeBubbles() {
@@ -555,9 +605,8 @@ masterTL
   })
 
   // === TRANSITION TO BLANK SCENE ===
-  // Increase overlap and use linear easing to avoid any visual gap
-  .to(coralScene, { y: "-100.2vh", duration: 0.3, ease: "none" }, "-=0.12")
-  .to(blankScene, { y: "0vh", duration: 0.3, ease: "none" }, "-=0.34")
+  .to(coralScene, { y: "-100vh", duration: 0.3, ease: "power2.inOut" }, "-=0.1")
+  .to(blankScene, { y: "0vh", duration: 0.3, ease: "power2.inOut" }, "-=0.3")
   .set(fixedSodaBottle, { opacity: 0 })
 
   // === BLANK SCENE ANIMATIONS ===
@@ -607,6 +656,53 @@ masterTL
   .to(blankScene, { y: "-100vh", duration: 0.3, ease: "power2.inOut" }, "-=0.1")
   .to(finaleScene, { y: "0vh", duration: 0.3, ease: "power2.inOut" }, "-=0.3")
   .call(() => { /* keep soda hidden in finale unless desired */ })
+
+  // === FINALE SCENE TEXT ANIMATIONS ===
+  // Clear main text and make visible, hide scroll text initially
+  .set(finaleScene.querySelector('.finale-text p'), { innerHTML: "", opacity: 1 })
+  .set(finaleScene.querySelector('.scroll-text p'), { opacity: 0 })
+  
+  // Scroll-tied typewriter effect
+  .to({}, { 
+    duration: 5.0, // 5 seconds of scroll time for main text (slower)
+    onUpdate: function() {
+      const mainText = finaleScene.querySelector('.finale-text p');
+      const progress = this.progress(); // 0 to 1
+      const fullText = "EVERY SMALL CHOICE MAKES A WAVE OF CHANGE.";
+      const currentLength = Math.floor(progress * fullText.length);
+      mainText.innerHTML = fullText.substring(0, currentLength);
+    },
+    onReverseComplete: () => {
+      // Clear main text when scrolling backwards
+      const mainText = finaleScene.querySelector('.finale-text p');
+      const scrollText = finaleScene.querySelector('.scroll-text p');
+      mainText.innerHTML = '';
+      scrollText.style.opacity = '0';
+    }
+  })
+  
+  // Wait a bit after main text is done
+  .to({}, { duration: 0.5 })
+  
+  // Animate scroll text (like blank text but single line)
+  .fromTo(finaleScene.querySelector('.scroll-text p'),
+    { opacity: 0, scale: 0.98, transformOrigin: '50% 50%', immediateRender: false },
+    { opacity: 1, scale: 1, duration: 0.7, ease: 'power1.out' }
+  )
+  
+  // Hold the text visible for reading
+  .to({}, { duration: 1.0 })
+
+  // === TRANSITION TO BLUE SCENE ===
+  .to(finaleScene, { y: "-100vh", duration: 0.3, ease: "power2.inOut" }, "-=0.1")
+  .to(blueScene, { y: "0vh", duration: 0.3, ease: "power2.inOut" }, "-=0.3")
+
+  // Animate content container moving down as you scroll
+  .to(blueScene.querySelector('.content-container'), { 
+    y: "-80vh", // Move content up by 80vh to show more bottom content
+    duration: 2.0, // 2 seconds of scroll time (faster)
+    ease: "none"
+  })
 
   // Continue timeline to allow scrolling to continue
   .to({}, { duration: 1.0 })

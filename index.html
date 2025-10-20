@@ -15,6 +15,28 @@
     />
   </head>
   <body>
+    <!-- Resize overlays for small screens -->
+    <div id="resize-overlay-width">
+      <div class="resize-message">
+        <h2>Please resize your window</h2>
+        <p>This experience requires a <span class="highlight">wider</span> screen. Please make your window <span class="highlight">wider than 1286px</span>.</p>
+      </div>
+    </div>
+
+    <div id="resize-overlay-height">
+      <div class="resize-message">
+        <h2>Please resize your window</h2>
+        <p>This experience requires a <span class="highlight">taller</span> screen. Please make your window <span class="highlight">taller than 682px</span>.</p>
+      </div>
+    </div>
+
+    <div id="resize-overlay-both">
+      <div class="resize-message">
+        <h2>Please resize your window</h2>
+        <p>This experience requires a larger screen. Please make your window <span class="highlight">wider than 1286px</span> and <span class="highlight">taller than 682px</span>.</p>
+      </div>
+    </div>
+
     <main>
       <!-- ====== SCENE 1: BEACH ========== -->
       <section class="scene" id="scene-beach">
@@ -312,7 +334,7 @@
     <p class="line1"> On the seabed, plastics accumulate into hidden dumps.</p>
     <p class="line2"> A single bottle can take up to 450 years to fully break down,</p>
     <p class="line3"> slowly releasing chemicals the entire time.</p>
-    <p class="line4"> By 2050, scientists warn there that by weight,</p>
+    <p class="line4"> By 2050, scientists warn that by weight,</p>
     <p class="line5"> there may be more plastic than fish in the ocean if nothing changes.</p>
   </div>
 </section>
@@ -327,6 +349,87 @@
       height="180"
       data-src="img/bg/bg10.png"
     ></canvas>
+
+    <div class="finale-text">
+      <p></p>
+    </div>
+
+    <div class="scroll-text">
+      <p>SCROLL DOWN TO LEARN HOW YOU CAN HELP.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SCENE 11: BLUE BACKGROUND ==========  -->
+<section class="scene" id="scene-blue">
+  <div class="scene-wrapper">
+    <!-- Blue background div instead of canvas -->
+    <div class="blue-background"></div>
+    
+    <!-- Content sections -->
+    <div class="content-container">
+      <!-- Prevention Section -->
+      <div class="content-section prevention-section">
+        <h2 class="section-heading">PREVENTION</h2>
+        <div class="content-points">
+          <div class="point">
+            <h3 class="point-title">Waste Management Efforts</h3>
+            <p class="point-description">Improving collection, disposal and treatment systems can help stop plastic leaking into the ocean.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">Education and Campaigns</h3>
+            <p class="point-description">Raising public awareness through targeted campaigns that promote sustainable behavior and community participation will help reduce marine litter.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">Technology</h3>
+            <p class="point-description">Developing and applying advanced tools like ocean-cleaning devices and biodegradable materials will help prevent plastics from entering and persisting in marine environments.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">Incentives</h3>
+            <p class="point-description">Implementing incentives that motivate individuals or companies can reduce plastic production and consumption, or at least lessen it.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">Recycle</h3>
+            <p class="point-description">Strengthening recycling systems help ensure plastic waste is effectively reprocessed.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">Product Choice</h3>
+            <p class="point-description">Intentionally choosing products that contain microbeads (which contaminates ecosystems) and choosing safer alternatives</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Cleanup Section -->
+      <div class="content-section cleanup-section">
+        <h2 class="section-heading">CLEANUP</h2>
+        <div class="content-points">
+          <div class="point">
+            <h3 class="point-title">Beach Cleanups</h3>
+            <p class="point-description">Volunteering to remove litter directly from coastlines before in enters the ocean, either by joining cleanups or doing it your own time.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">River Intervention</h3>
+            <p class="point-description">Installing barriers and collection systems in rivers can help intercept waste at entry points into the sea.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">Ocean Cleanup Tech</h3>
+            <p class="point-description">Deploying and supporting systems like floating barriers and collection machines to help capture plastics already circulating.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">Retrieving Fishing Gear</h3>
+            <p class="point-description">Recovering lost or abandoned gear that is a high threat to marine life through entanglement and damaging the habitat.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">Upcycling</h3>
+            <p class="point-description">Transforming collected litter into usable products help reduce waste and supports a circular economy.</p>
+          </div>
+          <div class="point">
+            <h3 class="point-title">Cooperation</h3>
+            <p class="point-description">International efforts and funding to help scale cleanup operations and protect our shared marine environment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
