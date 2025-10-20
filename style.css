@@ -2,7 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 30000px; /* Match ScrollTrigger end distance */
   background: #000; /* Ensure solid black background */
   overflow-x: hidden;
   font-family: "Courier New", monospace;

@@ -7,38 +7,6 @@ window.addEventListener('resize', () => {
   }, 100); // Small delay to prevent excessive refreshes
 });
 
-// Display current window size for debugging
-console.log(`Current window size: ${window.innerWidth}x${window.innerHeight}`);
-console.log(`Use this as your max-width: ${window.innerWidth}px`);
-
-// Also display it on the page temporarily
-document.addEventListener('DOMContentLoaded', () => {
-  const sizeDisplay = document.createElement('div');
-  sizeDisplay.style.cssText = `
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: rgba(0,0,0,0.8);
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    font-family: monospace;
-    z-index: 10000;
-    font-size: 14px;
-  `;
-  sizeDisplay.innerHTML = `
-    Window: ${window.innerWidth}x${window.innerHeight}<br>
-    Max-width: ${window.innerWidth}px
-  `;
-  document.body.appendChild(sizeDisplay);
-  
-  // Remove after 5 seconds
-  setTimeout(() => {
-    if (sizeDisplay.parentNode) {
-      sizeDisplay.parentNode.removeChild(sizeDisplay);
-    }
-  }, 5000);
-});
 
 function drawScaled(img, canvas, ctx, sharedScale) {
   const baseW = 320;
@@ -122,7 +90,7 @@ const masterTL = gsap.timeline({
     end: "+=30000",  // Even longer scroll distance to reach all scenes including blue scene
     scrub: 1,
     pin: false,  // We'll handle pinning manually
-    markers: true,
+    markers: false,
   }
 });
 
